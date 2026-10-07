@@ -1,6 +1,7 @@
 package dev.ironjungle.entity;
 
 import dev.ironjungle.item.PantherArmorItem;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -221,6 +222,17 @@ public class PantherEntity extends TameableEntity {
 		}
 		return !(target instanceof PlayerEntity && owner instanceof PlayerEntity
 				&& !((PlayerEntity) owner).shouldDamagePlayer((PlayerEntity) target));
+	}
+
+	@Override
+	public boolean tryAttack(Entity target) {
+		boolean hit = super.tryAttack(target);
+		// Рык при атаке: шипение кошки, но ниже и громче
+		this.playSound(SoundEvents.ENTITY_CAT_HISS, 1.2f, 0.5f + this.random.nextFloat() * 0.1f);
+		if (hit) {
+			this.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_STRONG, 0.8f, 0.8f);
+		}
+		return hit;
 	}
 
 	@Override
