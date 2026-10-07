@@ -25,7 +25,7 @@ public class PantherArmorFeature extends FeatureRenderer<PantherEntity, PantherM
 	public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light,
 					   PantherEntity entity, float limbAngle, float limbDistance, float tickDelta,
 					   float animationProgress, float headYaw, float headPitch) {
-		ItemStack armor = entity.getArmor();
+		ItemStack armor = entity.getPantherArmor();
 		if (!(armor.getItem() instanceof PantherArmorItem armorItem)) {
 			return;
 		}

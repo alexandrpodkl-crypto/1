@@ -95,12 +95,12 @@ public class PantherEntity extends TameableEntity {
 		return isFood(stack);
 	}
 
-	public ItemStack getArmor() {
+	public ItemStack getPantherArmor() {
 		return this.getEquippedStack(EquipmentSlot.BODY);
 	}
 
-	public boolean hasArmor() {
-		return !this.getArmor().isEmpty();
+	public boolean hasPantherArmor() {
+		return !this.getPantherArmor().isEmpty();
 	}
 
 	/** Сообщение хозяину над хотбаром (только на сервере, чтобы не дублировалось). */
@@ -122,7 +122,7 @@ public class PantherEntity extends TameableEntity {
 
 			// Надеть броню
 			if (stack.getItem() instanceof PantherArmorItem) {
-				if (this.hasArmor()) {
+				if (this.hasPantherArmor()) {
 					tell(player, "message.ironjungle.panther.armor_already");
 					return ActionResult.success(world.isClient);
 				}
@@ -136,9 +136,9 @@ public class PantherEntity extends TameableEntity {
 			}
 
 			// Снять броню ножницами
-			if (stack.isOf(Items.SHEARS) && this.hasArmor()) {
+			if (stack.isOf(Items.SHEARS) && this.hasPantherArmor()) {
 				if (!world.isClient) {
-					this.dropStack(this.getArmor().copy());
+					this.dropStack(this.getPantherArmor().copy());
 					this.equipStack(EquipmentSlot.BODY, ItemStack.EMPTY);
 					this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0f, 1.0f);
 				}
